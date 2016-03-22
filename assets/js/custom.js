@@ -1,4 +1,5 @@
 var map;
+var zones = [];
 
 $(function() {
     loadData();
@@ -10,7 +11,30 @@ function initMap(center, bounds, zones) {
     map.fitBounds(bounds);
 
     zones.forEach(function(zone) {
-        zone.setMap(map);
+        zone.gmapPolygon.setMap(map);
+    });
+
+    var marker = new google.maps.Marker({
+        map: map,
+        draggable: true,
+        animation: google.maps.Animation.DROP,
+        position: center
+    });
+
+    marker.addListener('dragend', function(pos) {
+        var droppedZone = null;
+        zones.forEach(function(zone) {
+            if (google.maps.geometry.poly.containsLocation(pos.latLng, zone.gmapPolygon)) {
+                droppedZone = zone;
+            }
+        });
+
+        if (droppedZone) {
+            // TODO: display zone information here
+            showConsole(droppedZone.name);
+        } else {
+            showConsole('You shall not park');
+        }
     });
 }
 
@@ -32,9 +56,9 @@ function loadData() {
         var bounds = new google.maps.LatLngBounds(boundSW, boundNE);
 
         // zones
-        var zones = [];
         data.location_data.zones.forEach(function(zone) {
-            zones.push(getZonePolygon(zone));
+            zone.gmapPolygon = getZonePolygon(zone);
+            zones.push(zone);
         });
 
         initMap(center, bounds, zones);
@@ -65,4 +89,10 @@ function getZonePolygon(zone) {
     });
 
     return polygon;
+}
+
+function showConsole(msg) {
+    $('#console').removeClass('visible');
+    $('#console').addClass('visible');
+    $('#console').html(msg);
 }

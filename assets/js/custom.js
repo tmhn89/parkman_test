@@ -1,8 +1,37 @@
 var map;
 var zones = [];
 
+var currentParkingZone = null;
+
 $(function() {
     loadData();
+
+    // bind event to park button
+    $(document).on('click', '.btn-park', function(event) {
+        event.preventDefault();
+        var selectedId = $(this).attr('href');
+        var selectedZone = _.find(zones, function(zone) {
+            return zone.id == selectedId;
+        });
+        $('#selectedZone').html(selectedZone.name);
+
+        if (currentParkingZone) {
+            currentParkingZone.gmapPolygon.setOptions (
+                {
+                    'fillColor': getZoneColor(currentParkingZone),
+                    'strokeColor': getZoneColor(currentParkingZone)
+                }
+            );
+        }
+
+        selectedZone.gmapPolygon.setOptions (
+            {
+                'fillColor': 'blue',
+                'strokeColor': 'blue'
+            }
+        );
+        currentParkingZone = selectedZone;
+    });
 });
 
 function initMap(center, bounds, zones) {
@@ -31,9 +60,7 @@ function initMap(center, bounds, zones) {
 
         if (droppedZone) {
             // TODO: display zone information here
-            showConsole(droppedZone.name);
-        } else {
-            showConsole('You shall not park');
+            fillZoneInfo(droppedZone);
         }
     });
 }
@@ -71,13 +98,17 @@ function strToLatLng(str, separator) {
     return new google.maps.LatLng(lat, lng);
 }
 
+function getZoneColor(zone) {
+    return zone.payment_is_allowed === "0" ? 'red' : 'green';
+}
+
 function getZonePolygon(zone) {
     var coords = [];
     zone.polygon.split(', ').forEach(function(point) {
         coords.push(strToLatLng(point, ' '));
     });
 
-    var color = zone.payment_is_allowed === "0" ? 'red' : 'green';
+    var color = getZoneColor(zone);
 
     var polygon = new google.maps.Polygon({
         paths: coords,
@@ -95,4 +126,16 @@ function showConsole(msg) {
     $('#console').removeClass('visible');
     $('#console').addClass('visible');
     $('#console').html(msg);
+}
+
+function fillZoneInfo(zone) {
+    var infoContent = '<li><span class="title">Name: </span>' + zone.name + '</li>' +
+        '<li><span class="title">Provider: </span>' + zone.provider_name + '</li>' +
+        '<li><span class="title">Allowed payment: </span>' + zone.payment_is_allowed + '</li>' +
+        '<li><span class="title">Price: </span>' + zone.service_price + zone.currency + '</li>' +
+        '<li><span class="title">Max duration: </span>' + zone.max_duration + ' min.</li>' +
+        '<li><span class="title">Require sticker: </span>' + zone.sticker_required + '</li>' +
+        '<li><a class="btn btn-success btn-park" href="' + zone.id + '">Park now</a></li>';
+
+    $('#info').html(infoContent);
 }

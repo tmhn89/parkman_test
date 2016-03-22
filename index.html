@@ -3,19 +3,30 @@
 <head>
     <meta charset="UTF-8">
     <title>ParkMan Test</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css" />
     <link rel="stylesheet" href="assets/css/custom.css" />
 </head>
 <body>
-    <div id="map">
-
+    <div class="row">
+        <div class="col-md-12 col-xs-12">
+            <div id="map"></div>
+        </div>
     </div>
-
-    <div id="console"></div>
-
+    <div class="row">
+        <div class="container">
+            <div class="col-md-6">
+                <h2>You shall not park</h2>
+                <ul class="list-unstyled" id="info"></ul>
+            </div>
+            <div class="col-md-6">
+                <h2>You are parking at: <span id="selectedZone"></span></h2>
+            </div>
+        </div>
+    </div>
     <!-- JS import -->
-    <script src="https://code.jquery.com/jquery-2.2.2.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <script src="assets/js/jquery.js"></script>
+    <script src="assets/js/bootstrap.min.js"></script>
+    <script src="assets/js/underscore.min.js"></script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAUvuN1-gAntEB41XobHNrZliSqbBIO7sw"></script>
     <script src="assets/js/custom.js"></script>
 </body>

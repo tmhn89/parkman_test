@@ -26,7 +26,7 @@ $(function () {
 
         $('#selectedZone').empty().html(
             '<p>' + PARKED_SELECTED_ZONE_TEXT + '</p>' +
-            '<h3>' + selectedZone.name + '</h3>' +
+            '<h4>' + selectedZone.name + '</h4>' +
             '<p><b>From: </b>' + currentTimeStr + '</p>');
         applyAnimation($('#selectedZone'), 'slideInRight');
 

@@ -1,6 +1,6 @@
 body {
     width: 100%;
-    overflow-x: hidden;
+    overflow: hidden;
     color: #2f4356;
     font-family: Exo;
 }
@@ -23,6 +23,13 @@ h2.app-title {
     margin-bottom: 20px;
     padding: 10px 20px;
     background: rgba(255,255,255,0.8);
+}
+
+@media (max-width: 768px) {
+    h2.app-title {
+        text-align: center;
+        zoom: 80%;
+    }
 }
 
 .box {
@@ -48,6 +55,20 @@ h2.app-title {
     text-align: right;
 }
 
+@media (max-width: 768px) {
+    .box {
+        position: fixed;
+        zoom: 80%;
+    }
+    #selectedZone {
+        right: 20px;
+        margin-left: 20px;
+    }
+    #zoneInfo {
+        bottom: 20px;
+    }
+}
+
 .btn-park {
     pointer-events: auto;
     border: none;
@@ -63,19 +84,6 @@ h2.app-title {
     height: 100vh;
 }
 
-@media (max-width: 768px) {
-    .box {
-        position: fixed;
-        zoom: 80%;
-    }
-    #selectedZone {
-        right: 20px;
-        margin-left: 20px;
-    }
-    #zoneInfo {
-        bottom: 20px;
-    }
-}
 /*#map {*/
     /*width: 100%;*/
     /*height: 80vh;*/

@@ -28,6 +28,7 @@ $(function () {
             '<p>' + PARKED_SELECTED_ZONE_TEXT + '</p>' +
             '<h3>' + selectedZone.name + '</h3>' +
             '<p><b>From: </b>' + currentTimeStr + '</p>');
+        applyAnimation($('#selectedZone'), 'slideInRight');
 
         if (currentParkingZone) {
             currentParkingZone.gmapPolygon.setOptions(
@@ -47,7 +48,7 @@ $(function () {
         currentParkingZone = selectedZone;
 
         // hide info box
-        $('#zoneInfo').addClass('hidden');
+        applyAnimation($('#zoneInfo'), 'fadeOutDown', true);
     });
 });
 
@@ -155,14 +156,20 @@ function fillZoneInfo(zone) {
         '<p class="text-center"><a class="btn btn-success btn-park" href="' + zone.id + '">Park now</a></p>';
 
     $('#zoneInfo').removeClass('hidden').html(infoContent);
+    applyAnimation($('#zoneInfo'), 'slideInUp');
 }
 
 function toTwoDigits(num) {
     return (num < 10 ? '0' :'' ) + num;
 }
 
-function applyAnimation(element, animationName) {
-    element.removeClass(animationName).addClass(animationName + ' animated').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function(){
-        $(this).removeClass(animationName);
+function applyAnimation(element, animationName, isHiding) {
+    element.removeClass('animated').removeClass(animationName)
+        .addClass(animationName + ' animated').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function(){
+        $(this).removeClass(animationName).removeClass('animated');
+
+        if (isHiding) {
+            $(this).addClass('hidden');
+        }
     });
 }

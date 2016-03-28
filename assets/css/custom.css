@@ -1,25 +1,84 @@
 body {
     width: 100%;
     overflow-x: hidden;
+    color: #2f4356;
+    font-family: Exo;
+}
+
+#content {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    margin: 0 auto;
+    z-index: 999;
+    pointer-events: none;
+}
+
+h2.app-title {
+    font-family: Oswald;
+    font-weight: bold;
+    text-transform: uppercase;
+    text-align: left;
+    margin-bottom: 20px;
+    padding: 10px 20px;
+    background: rgba(255,255,255,0.8);
+}
+
+.box {
+    margin-bottom: 20px;
+    background: rgba(255,255,255,0.8);
+    color: #2f4356;
+    padding: 10px;
+}
+
+.box.hidden {
+    background: rgba(255,255,255,0);
+}
+
+.box#selectedZone {
+    color: #3498db;
+}
+
+#zoneInfo, #zoneInfo h4 {
+    font-weight: bold;
+}
+
+#zoneInfo .provider {
+    text-align: right;
+}
+
+.btn-park {
+    pointer-events: auto;
+    border: none;
+    background-color: #3498db;
+}
+
+.btn-park:hover {
+    background-color: #2980b9;
 }
 
 #map {
     width: 100%;
-    height: 50vh;
+    height: 100vh;
 }
 
-#console {
-    position: fixed;
-    top: 50px;
-    right: 50px;
-    padding: 20px;
-    width: 300px;
-    height: 200px;
-    background-color: #fff;
-    opacity: 0;
-    transition: opacity 0.5s ease-in-out;
+@media (max-width: 768px) {
+    .box {
+        position: fixed;
+        zoom: 80%;
+    }
+    #selectedZone {
+        right: 20px;
+        margin-left: 20px;
+    }
+    #zoneInfo {
+        bottom: 20px;
+    }
 }
-
-#console.visible {
-    opacity: 0.8;
-}
+/*#map {*/
+    /*width: 100%;*/
+    /*height: 80vh;*/
+    /*border: 2px solid #3498db;*/
+    /*border-radius: 3px;*/
+/*}*/

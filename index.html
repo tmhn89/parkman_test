@@ -3,26 +3,34 @@
 <head>
     <meta charset="UTF-8">
     <title>ParkMan Test</title>
+    <link href='https://fonts.googleapis.com/css?family=Oswald' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Exo' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="assets/css/bootstrap.min.css" />
     <link rel="stylesheet" href="assets/css/custom.css" />
 </head>
 <body>
-    <div class="row">
-        <div class="col-md-12 col-xs-12">
-            <div id="map"></div>
-        </div>
-    </div>
-    <div class="row">
+    <div id="content">
         <div class="container">
-            <div class="col-md-6">
-                <h2>You shall not park</h2>
-                <ul class="list-unstyled" id="info"></ul>
+            <div class="row">
+                <div class="col-md-12 col-xs-12">
+                    <h2 class="app-title on-top">You shall not park</h2>
+                </div>
             </div>
-            <div class="col-md-6">
-                <h2>You are parking at: <span id="selectedZone"></span></h2>
+            <div class="row">
+                <div class="col-md-9 col-xs-12"></div>
+                <div class="col-md-3 col-xs-12">
+                    <div class="box on-top" id="selectedZone">
+                        <h4>Drag the marker on the map to choose your parking area.</h4>
+                    </div>
+                    <div class="box hidden" id="zoneInfo">
+                    </div>
+                </div>
             </div>
         </div>
     </div>
+
+    <div id="map"></div>
+
     <!-- JS import -->
     <script src="assets/js/jquery.js"></script>
     <script src="assets/js/bootstrap.min.js"></script>

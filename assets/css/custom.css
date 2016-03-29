@@ -57,6 +57,14 @@ h2.app-title {
     text-align: right;
 }
 
+#zoneInfo .allowed-payment {
+    color: #2ecc71;
+}
+
+#zoneInfo .allowed-payment.no {
+    color: #e74c3c;
+}
+
 @media (max-device-width: 768px) {
     .box {
         zoom: 80%;

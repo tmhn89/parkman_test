@@ -147,9 +147,14 @@ function getZonePolygon(zone) {
 }
 
 function fillZoneInfo(zone) {
+    var allowedPaymentClass = '';
+    if (zone.payment_is_allowed == 0) {
+        allowedPaymentClass = 'no';
+    }
+
     var infoContent = '<h4>' + zone.name + '</h4>' +
         '<p class="provider"><span class="title">by: </span>' + zone.provider_name + '</p>' +
-        '<p><span class="title">Allowed payment: </span>' + boolNumToText(zone.payment_is_allowed) + '</p>' +
+        '<p class="allowed-payment ' + allowedPaymentClass +'"><span class="title">Allowed payment: </span>' + boolNumToText(zone.payment_is_allowed) + '</p>' +
         '<p><span class="title">Price: </span>' + zone.service_price + zone.currency + '</p>' +
         '<p><span class="title">Max duration: </span>' + zone.max_duration + ' min.</p>' +
         '<p><span class="title">Require sticker: </span>' + boolNumToText(zone.sticker_required) + '</p>' +
